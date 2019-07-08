@@ -18,13 +18,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Code to initialize Parse
+    // (See above section 'Parse `initializeWithConfiguration` vs `setApplicationId`', if you have not already set it up)
+    if (PFUser.currentUser) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticatedViewController"];
+    }
+    else{
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         
         configuration.applicationId = @"APP_ID";
-        configuration.server = @"http://finstainsta.herokuapp.com/parse";
+        configuration.server = @"https://finstainsta.herokuapp.com/parse";
     }];
     
-    [Parse initializeWithConfiguration:config];
+        [Parse initializeWithConfiguration:config];
+    }
     return YES;
 }
 
