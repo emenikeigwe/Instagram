@@ -9,6 +9,7 @@
 #import "timelineViewController.h"
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
+#import "Post.h"
 
 @interface timelineViewController ()
 
@@ -19,6 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self viewPosts];
 
 }
 
@@ -32,6 +34,26 @@
         // PFUser.current() will now be nil
         if (!error){
             appDelegate.window.rootViewController = loginViewController;
+        }
+    }];
+}
+
+- (void)viewPosts{
+    // construct PFQuery
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
+    
+    // fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
+        if (posts) {
+            //DO THIS THING
+            // do something with the data fetched
+        }
+        else {
+            //DO THIS THING
+            // handle error
         }
     }];
 }
