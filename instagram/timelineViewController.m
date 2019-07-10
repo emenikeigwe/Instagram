@@ -35,6 +35,9 @@
         }
     }];
 }
+- (IBAction)newPost:(UIBarButtonItem *)sender {
+    [self performSegueWithIdentifier:@"composeSegue" sender:nil];
+}
 
 
 /*

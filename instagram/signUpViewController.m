@@ -26,6 +26,10 @@
     // Do any additional setup after loading the view.
 
 }
+- (IBAction)haveAccountButton:(UIButton *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)signButtonTapped:(id)sender {
     [self registerUser];
 }
@@ -51,4 +55,6 @@
         }
     }];
 }
+
+
 @end

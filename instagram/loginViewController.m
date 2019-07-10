@@ -16,6 +16,7 @@
 @end
 
 @implementation loginViewController
+
 - (IBAction)logButtonTapped:(UIButton *)sender {
     [self loginUser];
 }
@@ -24,7 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
-//needs to be moved to login view controller
+
 - (void)loginUser {
     NSString *username = self.usernameField2.text;
     NSString *password = self.passwordField2.text;
@@ -36,8 +37,14 @@
             NSLog(@"User logged in successfully");
             
             // display view controller that needs to shown after successful login
+            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         }
     }];
+}
+
+
+- (IBAction)signUpTapped:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"signUpSegue" sender:nil];
 }
 
 /*

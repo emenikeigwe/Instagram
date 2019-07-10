@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="e6L-33-u24">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MAf-Mv-mjC">
     <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,7 @@
         <!--Sign-Up View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Sign-Up View Controller" id="BYZ-38-t0r" customClass="signUpViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="signUpViewController" title="Sign-Up View Controller" id="BYZ-38-t0r" customClass="signUpViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -56,7 +56,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Already have an account?"/>
                                 <connections>
-                                    <segue destination="MAf-Mv-mjC" kind="presentation" identifier="haveAccount" id="BjH-fx-2WU"/>
+                                    <action selector="haveAccountButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nx3-U5-0A2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -68,17 +68,16 @@
                         <outlet property="emailField" destination="3pc-c7-Vpz" id="zhj-xX-Bec"/>
                         <outlet property="passwordField" destination="McU-U4-YDQ" id="RRE-ZB-etS"/>
                         <outlet property="usernameField" destination="zIJ-5E-mVj" id="9dq-ff-LV0"/>
-                        <segue destination="CrT-7w-u7A" kind="presentation" identifier="loginSegue" id="vIy-Bq-oX5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1245" y="88"/>
+            <point key="canvasLocation" x="1004" y="914"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="cYu-RL-qec">
             <objects>
-                <viewController id="MAf-Mv-mjC" customClass="loginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login View Controller" id="MAf-Mv-mjC" customClass="loginViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NHh-bw-pUr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -114,30 +113,40 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Need to make an account?"/>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" id="v2t-DT-gxP"/>
+                                    <action selector="signUpTapped:" destination="MAf-Mv-mjC" eventType="touchUpInside" id="27f-Bk-f6J"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="X3b-SU-vLd"/>
                     </view>
                     <navigationItem key="navigationItem" id="qBf-Rq-rot"/>
                     <connections>
                         <outlet property="passwordField2" destination="HZx-xz-KQT" id="HME-zJ-cvx"/>
                         <outlet property="usernameField2" destination="JcJ-1e-sdk" id="NcG-hA-6Hs"/>
+                        <segue destination="a1J-OZ-A2M" kind="show" identifier="loginSegue" id="0hn-WS-ieb"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="signUpSegue" id="KDd-0z-R2w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0m5-jf-w6U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1746" y="1369"/>
+            <point key="canvasLocation" x="141" y="1302"/>
         </scene>
         <!--Timeline View Controller-->
         <scene sceneID="xd2-aP-xmu">
             <objects>
-                <viewController id="Sg6-Qa-1rq" customClass="timelineViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="timeline View Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Sg6-Qa-1rq" customClass="timelineViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xhJ-5D-8tS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wvB-9x-9xB">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Jo7-ks-42b"/>
                     </view>
@@ -148,55 +157,103 @@
                                 <action selector="logoutButton:" destination="Sg6-Qa-1rq" id="OJU-V8-Mgq"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="New Post" image="insta_camera_btn" id="3LM-2a-ERU">
+                            <connections>
+                                <action selector="newPost:" destination="Sg6-Qa-1rq" id="kRp-sk-KG2"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="iy6-kU-2cs" kind="presentation" identifier="composeSegue" id="zPA-Ip-ORk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGf-d4-x44" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3902.898550724638" y="765.40178571428567"/>
+            <point key="canvasLocation" x="2824.6376811594205" y="1344.6428571428571"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="3hC-Y1-BpQ">
+            <objects>
+                <viewController id="x9j-jd-8gG" customClass="composeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tKI-c5-xiY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMc-oS-XeZ">
+                                <rect key="frame" x="20" y="101" width="170" height="146"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Write a caption..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1W0-pO-KZm">
+                                <rect key="frame" x="198" y="110" width="216" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="nLd-k7-kv5"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="DAF-gT-wYx">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YiV-EZ-rAn"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="2n0-hl-wes">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uRB-ep-xpF">
+                                <rect key="frame" x="332" y="0.0" width="62" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Share"/>
+                                <connections>
+                                    <action selector="didTapCameraButton:" destination="x9j-jd-8gG" eventType="touchUpInside" id="bVp-iF-5Mt"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CJv-n4-tWi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4515.9420289855079" y="1344.6428571428571"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="8Y9-Yw-pjV">
+        <scene sceneID="Zao-Jp-OBO">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="CrT-7w-u7A" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="timelineViewController" automaticallyAdjustsScrollViewInsets="NO" id="a1J-OZ-A2M" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WzV-eE-acB">
+                    <navigationItem key="navigationItem" id="cnH-wb-bUq"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="R7s-8J-036">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Sg6-Qa-1rq" kind="relationship" relationship="rootViewController" id="QEW-4G-N7N"/>
+                        <segue destination="Sg6-Qa-1rq" kind="relationship" relationship="rootViewController" id="gJI-hN-djh"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Em7-dO-DSB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3dg-d9-e52" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1953.6231884057972" y="87.723214285714278"/>
+            <point key="canvasLocation" x="1914" y="1345"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="GQ8-28-QlY">
+        <scene sceneID="uQh-OX-bOD">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e6L-33-u24" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="compose View Controller" automaticallyAdjustsScrollViewInsets="NO" id="iy6-kU-2cs" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="g3X-fN-KWb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8ce-6A-5bQ">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="MAf-Mv-mjC" kind="relationship" relationship="rootViewController" id="5xc-o5-1QI"/>
+                        <segue destination="x9j-jd-8gG" kind="relationship" relationship="rootViewController" id="pww-s5-8iY"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dwD-AR-HRR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="89e-Dd-oFg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="920" y="1369"/>
+            <point key="canvasLocation" x="3665" y="1345"/>
         </scene>
     </scenes>
     <resources>
         <image name="Icon-60" width="60" height="60"/>
+        <image name="insta_camera_btn" width="25" height="25"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="v2t-DT-gxP"/>
-        <segue reference="BjH-fx-2WU"/>
-    </inferredMetricsTieBreakers>
 </document>
