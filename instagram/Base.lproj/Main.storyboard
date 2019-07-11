@@ -141,12 +141,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wvB-9x-9xB">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="531" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wvB-9x-9xB">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="531" id="uto-jq-Ohd">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="531" id="uto-jq-Ohd" customClass="postCell">
                                         <rect key="frame" x="0.0" y="28" width="414" height="531"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uto-jq-Ohd" id="MqU-S3-o7H">
@@ -177,6 +177,12 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="postImage" destination="u7S-68-1Zf" id="23h-tI-qyq"/>
+                                            <outlet property="postText" destination="AcC-wI-k1f" id="tia-8e-rvt"/>
+                                            <outlet property="profileImage" destination="NOc-fN-0wC" id="SjQ-A4-RRm"/>
+                                            <outlet property="profileNameLabel" destination="wu4-dS-RfL" id="Py7-CB-58j"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -199,6 +205,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="tableView" destination="wvB-9x-9xB" id="igy-sP-Ppw"/>
                         <segue destination="iy6-kU-2cs" kind="presentation" identifier="composeSegue" id="zPA-Ip-ORk"/>
                     </connections>
                 </viewController>
@@ -214,12 +221,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMc-oS-XeZ">
-                                <rect key="frame" x="20" y="101" width="170" height="146"/>
+                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMc-oS-XeZ">
+                                <rect key="frame" x="20" y="101" width="146" height="146"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="bmW-Ze-I1s" appends="YES" id="Qgq-hK-cfw"/>
+                                </connections>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Write a caption..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1W0-pO-KZm">
-                                <rect key="frame" x="198" y="110" width="216" height="128"/>
+                                <rect key="frame" x="178" y="110" width="216" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -231,20 +243,33 @@
                         <viewLayoutGuide key="safeArea" id="nLd-k7-kv5"/>
                     </view>
                     <navigationItem key="navigationItem" id="DAF-gT-wYx">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YiV-EZ-rAn"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="YiV-EZ-rAn">
+                            <connections>
+                                <action selector="didTapCancelButton:" destination="x9j-jd-8gG" id="GoA-vJ-Hjh"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="2n0-hl-wes">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uRB-ep-xpF">
                                 <rect key="frame" x="332" y="0.0" width="62" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Share"/>
                                 <connections>
-                                    <action selector="didTapCameraButton:" destination="x9j-jd-8gG" eventType="touchUpInside" id="bVp-iF-5Mt"/>
+                                    <action selector="didTapShareButton:" destination="x9j-jd-8gG" eventType="touchUpInside" id="BnS-ar-q8F"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="composeImage" destination="IMc-oS-XeZ" id="JDc-Jx-ypD"/>
+                        <outlet property="postTextField" destination="1W0-pO-KZm" id="piL-wE-AV9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJv-n4-tWi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="bmW-Ze-I1s">
+                    <connections>
+                        <action selector="photoTapped:" destination="x9j-jd-8gG" id="PxP-GY-erP"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4515.9420289855079" y="1344.6428571428571"/>
         </scene>

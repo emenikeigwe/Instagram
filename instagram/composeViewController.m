@@ -7,14 +7,42 @@
 //
 
 #import "composeViewController.h"
-
+#import "Post.h"
 @interface composeViewController ()
-
+@property (weak, nonatomic) IBOutlet UIImageView *composeImage;
+@property (weak, nonatomic) IBOutlet UITextView *postTextField;
 @end
 
 @implementation composeViewController
+- (IBAction)didTapCancelButton:(UIBarButtonItem *)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)photoTapped:(UITapGestureRecognizer *)sender {
+    [self imagePickerSetup];
+}
 
-- (IBAction)didTapCameraButton:(UIButton *)sender {
+//share button tapped; actions after completion
+- (IBAction)didTapShareButton:(UIButton *)sender {
+    [Post postUserImage:self.composeImage.image withCaption:self.postTextField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if (succeeded){
+            NSLog(@"success");
+        }
+        else{
+            NSLog(@"error");
+        }
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }];
+}
+
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+}
+
+- (void) imagePickerSetup{
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
@@ -30,13 +58,8 @@
         imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
 }
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+//verifying that imagepicker actually picked images utilizing given info
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
@@ -48,9 +71,9 @@
     CGSize new_size = CGSizeMake(width, height);
     
     //clarify which of the images should be changed
-    [self resizeImage:originalImage withSize:new_size];
-    [self resizeImage:editedImage withSize:new_size];
-    
+    originalImage = [self resizeImage:originalImage withSize:new_size];
+    editedImage = [self resizeImage:editedImage withSize:new_size];
+    self.composeImage.image = originalImage;
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
