@@ -20,16 +20,22 @@
 @property (strong, nonatomic) NSArray<Post*> *posts;
 @end
 
-@implementation timelineViewController
+@implementation timelineViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    //tells table view who its data source and delegate is
+    self.tableView.dataSource = self;
+     self.tableView.delegate = self;
+    
+    
     // Initialize a UIRefreshControl
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(fetchPosts:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
+    [self.tableView reloadData];
     
     //reveals posts
     [self viewPosts];

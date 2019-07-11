@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface timelineViewController : UIViewController <UITableViewDataSource>
+@interface timelineViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @end
 
