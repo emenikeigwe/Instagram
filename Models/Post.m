@@ -22,6 +22,7 @@
     return @"Post";
 }
 
+
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Post *newPost = [Post new];
@@ -30,7 +31,6 @@
     newPost.caption = caption;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
-    newPost.profileImage = [self getPFFileFromImage:image];
     
     [newPost saveInBackgroundWithBlock: completion];
 }

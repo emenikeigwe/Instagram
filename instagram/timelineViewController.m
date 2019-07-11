@@ -16,7 +16,6 @@
 @end
 @interface timelineViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @property (strong, nonatomic) NSArray<Post*> *posts;
 @end
 
@@ -28,7 +27,7 @@
     
     //tells table view who its data source and delegate is
     self.tableView.dataSource = self;
-     self.tableView.delegate = self;
+    self.tableView.delegate = self;
     
     // Initialize a UIRefreshControl
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -114,10 +113,24 @@
     [self performSegueWithIdentifier:@"composeSegue" sender:nil];
 }
 
+
+
 //next two methods are vv important for data sources
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.posts.count;
+}
+
+- (NSString *)getDateStringFromDate:(NSDate *)date {
+    static NSDateFormatter *dateFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dateFormatter = [[NSDateFormatter alloc] init];
+        // Output: 2011-05-01 13:15:08
+        dateFormatter.dateFormat = @"MM-dd-yyyy HH:mm:ss";
+    });
+    
+    return [dateFormatter stringFromDate:date];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -130,9 +143,6 @@
     //set profile name
     cell.profileNameLabel.text = post.author.username;
     
-    //*set profile image <to-do>*
-    //cell.profileImage = post.author;
-    
     //set post image
     PFFileObject *post_image = post.image;
     [post_image getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
@@ -142,11 +152,16 @@
     //set post text
     cell.postText.text = post.caption;
     
+    //set timestamp
+    cell.timeStampLabel.text = [self getDateStringFromDate:post.createdAt];
+    
+    //set profile image
+    /*
     cell.profileImage.image = nil;
     PFFileObject *post_profile_image = post.profileImage;
     [post_profile_image getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
         cell.profileImage.image = [UIImage imageWithData:data];
-    }];
+    }];*/
     
     return cell;
 }
