@@ -30,13 +30,11 @@
     self.tableView.dataSource = self;
      self.tableView.delegate = self;
     
-    
     // Initialize a UIRefreshControl
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(fetchPosts:) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:refreshControl atIndex:0];
     [self.tableView reloadData];
-    
     //reveals posts
     [self viewPosts];
 
@@ -67,7 +65,9 @@
     // fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable posts, NSError * _Nullable error) {
         if (posts) {
+            //updates table view's data
             self.posts = posts;
+            //NSLog(@"success");
             [self.tableView reloadData];
         }
         else {
@@ -102,12 +102,11 @@
 }
 
 // Fetches post data
-// Updates the tableView with the new data
-// Hides the RefreshControl
 - (void)fetchPosts:(UIRefreshControl *)refreshControl {
-    //actually refresh the data
+    [self viewPosts];
+    //[self.tableView reloadData];
+    //stops refresh
     [refreshControl endRefreshing];
-    [self.tableView reloadData];
 }
    
 //user presses the camera button to make a new post
@@ -143,8 +142,11 @@
     //set post text
     cell.postText.text = post.caption;
     
-    //cell.posterView.image = nil;
-    //[cell.posterView setImageWithURL: posterURL];
+    cell.profileImage.image = nil;
+    PFFileObject *post_profile_image = post.profileImage;
+    [post_profile_image getDataInBackgroundWithBlock:^(NSData * _Nullable data, NSError * _Nullable error) {
+        cell.profileImage.image = [UIImage imageWithData:data];
+    }];
     
     return cell;
 }
